@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "5cafb4262455cf1b831d8824",
+    "phone": "+393391848457",
+    "merchants": [
+      {
+        "merchant": "5c9e1d645918590a0d984ebc",
+        "cards": [
+          {
+            "card": "5c9e1ec25918590a0d984ebf",
+            "marked": 1,
+            "history": [
+              {
+                "type": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "5c9e1ec25918590a0d984ebf",
+    "merchant": "5c9e1d645918590a0d984ebc",
+    "name": "Tessera Pranzo",
+    "description": "Lorem ipsum dolor sit amet",
+    "header": {
+      "logo": {
+        "src": "logo_5c9e1d645918590a0d984ebc.png",
+        "width": 35,
+        "height": 16,
+        "position": "left",
+        "verticalPosition": "top"
+      },
+      "text1": {
+        "value": "Tessera Pranzo"
+      },
+      "text2": {
+        "value": "Ogni 10 Pranzi 1 Omaggio!"
+      }
+    },
+    "footer": {
+      "value": "N.B. Non valido nei giorni festivi"
+    },
+    "design": "horizontal",
+    "marks": {
+      "total": 10,
+      "rows": 2,
+      "rowSpacing": 15,
+      "mark": {
+        "image": {
+          "src": "marker_5c9e1ec25918590a0d984ebf.png",
+          "width": 38,
+          "height": 11
+        },
+        "style": {
+          "backgroundColor": "#000000",
+          "shape": {
+            "type": "round",
+            "value": 12
+          }
+        }
+      }
+    },
+    "style": {
+      "height": 210,
+      "backgroundColor": "#333",
+      "borderRadius": 10
+    }
+  }
+]
