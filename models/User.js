@@ -18,7 +18,8 @@ const UserSchema = new mongoose.Schema({
       merchant: {
         type: mongoose.Schema.ObjectId,
         ref: "Merchant",
-        required: true
+        required: true,
+        unique: true
       },
       hidden: {
         type: Boolean

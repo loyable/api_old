@@ -5,17 +5,37 @@ const User = require("../models/User");
 const Card = require("../models/Card");
 
 // @desc    Get all cards
-// @route   GET /api/v1/cards
+// @route   GET /api/v1/cards || GET /api/v1/merchant/:merchant/cards
 // @access  Private/Admin
 exports.getCards = asyncHandler(async (req, res, next) => {
-  res.status(200).json(res.advancedResults);
+  if (req.params.merchant) {
+    const cards = await Card.find({
+      merchant: req.params.merchant
+    });
+    return res.status(200).json({
+      success: true,
+      count: cards.length,
+      data: cards
+    });
+  } else {
+    res.status(200).json(res.advancedResults);
+  }
 });
 
 // @desc    Get card
 // @route   GET /api/v1/cards/:id
-// @access  Private/Card
+// @access  Private/Merchant
 exports.getCard = asyncHandler(async (req, res, next) => {
-  const card = await Card.findById(req.params.id).populate("cards");
+  let card;
+
+  if (req.params.merchant) {
+    card = await Card.findOne({
+      _id: req.params.id,
+      merchant: req.params.merchant
+    });
+  } else {
+    card = await Card.findById(req.params.id).populate("cards");
+  }
 
   if (!card) {
     return next(
