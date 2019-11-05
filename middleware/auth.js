@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
+const Merchant = require("../models/Merchant");
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -27,7 +28,11 @@ exports.protect = asyncHandler(async (req, res, next) => {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = await User.findById(decoded.id);
+    if (decoded.role === "user") {
+      req.user = await User.findById(decoded.id);
+    } else {
+      req.merchant = await Merchant.findById(decoded.id);
+    }
 
     next();
   } catch (err) {

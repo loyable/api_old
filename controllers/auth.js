@@ -3,6 +3,7 @@ const asyncHandler = require("../middleware/async");
 const sendEmail = require("../utils/sendEmail");
 const SMSClient = require("../utils/sms");
 const User = require("../models/User");
+const Merchant = require("../models/Merchant");
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
@@ -62,55 +63,102 @@ exports.register = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
-  const { phone, smsCode } = req.body;
+  const { phone, smsCode, email, password } = req.body;
 
-  // Validate phone
-  if (!phone) {
-    return next(new ErrorResponse("Please provide a phone number", 400));
+  // User login
+  if (phone || smsCode) {
+    // Validate phone
+    if (!phone) {
+      return next(new ErrorResponse("Please provide a phone number", 400));
+    }
+
+    // Validate smsCode
+    if (!smsCode) {
+      return next(new ErrorResponse("Please provide the SMS code", 400));
+    }
+
+    // Instantiate SMS class
+    const SMS = new SMSClient(phone);
+
+    // Check for user
+    const user = await User.findOne({ phone });
+
+    // If user not registered
+    if (!user) {
+      return next(new ErrorResponse("User not registered", 404));
+    }
+
+    if (SMS.expired(user.smsExpire)) {
+      user.resetSMSToken({ logged: false });
+
+      return next(
+        new ErrorResponse(
+          "SMS token is expired, please call /register again",
+          401
+        )
+      );
+    }
+
+    if (!SMS.verifyHash(smsCode, user.smsToken)) {
+      return next(
+        new ErrorResponse("SMS code is invalid, please try again", 401)
+      );
+    }
+
+    sendTokenResponse(user, 200, res);
+
+    user.resetSMSToken({ logged: true });
+    // Merchant login
+  } else if (email || password) {
+    // Validate email & password
+    if (!email || !password) {
+      return next(
+        new ErrorResponse("Please provide and email and a password", 400)
+      );
+    }
+
+    // Check for merchant
+    const merchant = await Merchant.findOne({ email }).select("+password");
+
+    if (!merchant) {
+      return next(new ErrorResponse("Invalid credentials", 401));
+    }
+
+    // Check if password matches
+    const isMatch = await merchant.matchPassword(password);
+
+    if (!isMatch) {
+      return next(new ErrorResponse("Invalid credentials", 401));
+    }
+
+    sendTokenResponse(merchant, 200, res);
+  }
+});
+
+// @desc    Update merchant password
+// @route   PUT /api/v1/auth/updatepassword
+// @access  Private
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+  const merchant = await Merchant.findOne({ email: req.body.email }).select(
+    "+password"
+  );
+
+  // Check current password
+  if (!(await merchant.matchPassword(req.body.currentPassword))) {
+    return next(new ErrorResponse("Password is incorrect", 401));
   }
 
-  // Validate smsCode
-  if (!smsCode) {
-    return next(new ErrorResponse("Please provide the SMS code", 400));
-  }
+  merchant.password = req.body.newPassword;
 
-  // Instantiate SMS class
-  const SMS = new SMSClient(phone);
+  await merchant.save();
 
-  // Check for user
-  const user = await User.findOne({ phone });
-
-  // If user not registered
-  if (!user) {
-    return next(new ErrorResponse("User not registered", 404));
-  }
-
-  if (SMS.expired(user.smsExpire)) {
-    user.resetSMSToken({ logged: false });
-
-    return next(
-      new ErrorResponse(
-        "SMS token is expired, please call /register again",
-        401
-      )
-    );
-  }
-
-  if (!SMS.verifyHash(smsCode, user.smsToken)) {
-    return next(
-      new ErrorResponse("SMS code is invalid, please try again", 401)
-    );
-  }
-
-  sendTokenResponse(user, 200, res);
-
-  user.resetSMSToken({ logged: true });
+  sendTokenResponse(merchant, 200, res);
 });
 
 // Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
+const sendTokenResponse = (merchant, statusCode, res) => {
   // Create token
-  const token = user.getSignedJwtToken();
+  const token = merchant.getSignedJwtToken();
 
   res.status(statusCode).json({ success: true, token });
 };
