@@ -67,12 +67,13 @@ const UserSchema = new mongoose.Schema({
       }
     }
   ],
-  changeNumberToken: String,
-  changeNumberExpire: Date,
+  smsToken: String,
+  smsExpire: Date,
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  lastLogin: Date
 });
 
 // Sign JWT and return
@@ -80,6 +81,17 @@ UserSchema.methods.getSignedJwtToken = function() {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
   });
+};
+
+// Reset smsToken & smsExpire
+UserSchema.methods.resetSMSToken = async function(params) {
+  this.smsToken = undefined;
+  this.smsExpire = undefined;
+  if (params.logged) {
+    this.lastLogin = Date.now();
+  }
+
+  await this.save();
 };
 
 module.exports = mongoose.model("User", UserSchema);

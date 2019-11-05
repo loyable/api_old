@@ -24,6 +24,7 @@ connectDB();
 const users = require("./routes/users");
 const merchants = require("./routes/merchants");
 const cards = require("./routes/cards");
+const auth = require("./routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -72,6 +73,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/users", users);
 app.use("/api/v1/merchants", merchants);
 app.use("/api/v1/cards", cards);
+app.use("/api/v1/auth", auth);
 
 // Error handler middleware
 app.use(errorHandler);
