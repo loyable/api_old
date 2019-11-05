@@ -23,19 +23,18 @@ const { protect, authorize } = require("../middleware/auth");
 router.use("/:merchant/users", usersRouter);
 router.use("/:merchant/cards", cardsRouter);
 
-// router.use(protect);
-// router.use(authorize("admin"));
+router.use(protect);
 
 // @route   GET /api/v1/merchants
 router
   .route("/")
-  .get(advancedResults(Merchant, "cards"), getMerchants)
-  .post(createMerchant);
+  .get(authorize("admin"), advancedResults(Merchant, "cards"), getMerchants)
+  .post(authorize("admin"), createMerchant);
 
 // @route   GET /api/v1/merchants/:id
 router
   .route("/:id")
-  .get(getMerchant)
+  .get(authorize("merchant", "admin"), getMerchant)
   .put(updateMerchant)
   .delete(deleteMerchant);
 

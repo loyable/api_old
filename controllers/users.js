@@ -37,6 +37,14 @@ exports.getUser = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // If role is "user" check if user id is the same
+  if (req.role === "user" && user._id.toString() !== req.user._id.toString()) {
+    return next(new ErrorResponse("Not authorized to access this user", 401));
+    // If role is "merchant" return only the merchant user details
+  } else if (req.role === "merchant") {
+    req.params.merchant = req.user._id.toString();
+  }
+
   if (req.params.merchant) {
     const merchant = user.merchants.find(
       merchant => merchant.merchant.id === req.params.merchant
@@ -117,6 +125,14 @@ exports.getMerchantFromUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/users/:id/merchants
 // @access  Private/Merchant
 exports.addMerchantToUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.body.merchant
+  ) {
+    return next(new ErrorResponse("Not authorized to add a merchant", 401));
+  }
+
   let user = await User.findById(req.params.id);
 
   // Check if merchants already exists
@@ -158,6 +174,19 @@ exports.addMerchantToUser = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/users/:id/merchants/:merchant
 // @access  Private/Merchant
 exports.updateMerchantInUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.body.merchant
+  ) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to update merchant with id ${req.params.merchant}`,
+        401
+      )
+    );
+  }
+
   let user = await User.findById(req.params.id);
 
   if (req.body.merchant || req.body._id) {
@@ -210,6 +239,19 @@ exports.deleteMerchantFromUser = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/users/:id/merchants/:merchant/cards
 // @access  Private/User | Private/Merchant
 exports.getMerchantCardsFromUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.params.merchant
+  ) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to get merchant cards with id ${req.params.merchant}`,
+        401
+      )
+    );
+  }
+
   const user = await User.findById(req.params.id).populate([
     "merchants.merchant",
     "merchants.cards.card"
@@ -230,6 +272,19 @@ exports.getMerchantCardsFromUser = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/users/:id/merchants/:merchant/cards/:card
 // @access  Private/User | Private/Merchant
 exports.getMerchantCardFromUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.params.merchant
+  ) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to get merchant cards with id ${req.params.merchant}`,
+        401
+      )
+    );
+  }
+
   const user = await User.findById(req.params.id).populate([
     "merchants.merchant",
     "merchants.cards.card"
@@ -241,6 +296,12 @@ exports.getMerchantCardFromUser = asyncHandler(async (req, res, next) => {
 
   const card = merchant.cards.find(card => card.id === req.params.card);
 
+  if (!card) {
+    return next(
+      new ErrorResponse(`No cards found with id ${req.params.card}`, 404)
+    );
+  }
+
   res.status(200).json({ success: true, data: card });
 });
 
@@ -248,6 +309,19 @@ exports.getMerchantCardFromUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/users/:id/merchants/:merchant/cards
 // @access  Private/Merchant
 exports.createMerchantCardInUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.params.merchant
+  ) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to add card to merchant with id ${req.params.merchant}`,
+        401
+      )
+    );
+  }
+
   let user = await User.findById(req.params.id);
 
   const merchants = user.merchants.map(merchant => {
@@ -279,6 +353,18 @@ exports.createMerchantCardInUser = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/users/:id/merchants/:merchant/cards/:card
 // @access  Private/Merchant
 exports.updateMerchantCardInUser = asyncHandler(async (req, res, next) => {
+  // Prevent merchants to add other merchant ID
+  if (
+    req.role === "merchant" &&
+    req.user._id.toString() !== req.params.merchant
+  ) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to update card in merchant with id ${req.params.merchant}`,
+        401
+      )
+    );
+  }
   let user = await User.findById(req.params.id);
 
   const merchants = user.merchants.map(merchant => {

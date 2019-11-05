@@ -8,7 +8,7 @@ const Card = require("../models/Card");
 // @route   GET /api/v1/cards || GET /api/v1/merchant/:merchant/cards
 // @access  Private/Admin
 exports.getCards = asyncHandler(async (req, res, next) => {
-  if (req.params.merchant) {
+  if (req.role === "merchant") {
     const cards = await Card.find({
       merchant: req.params.merchant
     });
@@ -23,7 +23,7 @@ exports.getCards = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get card
-// @route   GET /api/v1/cards/:id
+// @route   GET /api/v1/cards/:id || GET /api/v1/merchant/:merchant/cards/:card
 // @access  Private/Merchant
 exports.getCard = asyncHandler(async (req, res, next) => {
   let card;
@@ -43,6 +43,15 @@ exports.getCard = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (card.merchant.toString() !== req.user._id.toString()) {
+    return next(
+      new ErrorResponse(
+        `Not authorized to view card with id ${req.params.id}`,
+        401
+      )
+    );
+  }
+
   res.status(200).json({
     success: true,
     data: card
@@ -53,16 +62,38 @@ exports.getCard = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/cards
 // @access  Private/Admin
 exports.createCard = asyncHandler(async (req, res, next) => {
+  if (req.role === "merchant") {
+    req.body.merchant = req.user._id.toString();
+  }
   const card = await Card.create(req.body);
 
   res.status(201).json({ success: true, data: card });
 });
 
-// @desc    Update merchant
+// @desc    Update card
 // @route   PUT /api/v1/cards/:id
 // @access  Private/Admin
 exports.updateCard = asyncHandler(async (req, res, next) => {
-  const card = await Card.findByIdAndUpdate(req.params.id, req.body, {
+  let card = await Card.findById(req.params.id);
+
+  if (!card) {
+    return next(
+      new ErrorResponse(`Card not found with id ${req.params.id}`, 404)
+    );
+  }
+
+  if (req.role === "merchant") {
+    if (card.merchant.toString() !== req.user._id.toString()) {
+      return next(
+        new ErrorResponse(
+          `Not authorized to update card with id ${req.params.id}`,
+          401
+        )
+      );
+    }
+  }
+
+  card = await Card.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });

@@ -15,20 +15,23 @@ const router = express.Router({ mergeParams: true });
 const advancedResults = require("../middleware/advancedResults");
 const { protect, authorize } = require("../middleware/auth");
 
-// router.use(protect);
-// router.use(authorize("admin"));
+router.use(protect);
 
 // @route   GET /api/v1/cards
 router
   .route("/")
-  .get(advancedResults(Card, "merchant"), getCards)
-  .post(createCard);
+  .get(
+    authorize("merchant", "admin"),
+    advancedResults(Card, "merchant"),
+    getCards
+  )
+  .post(authorize("merchant", "admin"), createCard);
 
 // @route   GET /api/v1/cards/:id
 router
   .route("/:id")
-  .get(getCard)
-  .put(updateCard)
-  .delete(deleteCard);
+  .get(authorize("merchant", "admin"), getCard)
+  .put(authorize("merchant", "admin"), updateCard)
+  .delete(authorize("admin"), deleteCard);
 
 module.exports = router;

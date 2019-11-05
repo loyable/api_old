@@ -15,6 +15,16 @@ exports.getMerchants = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/merchant/:id
 // @access  Private/Merchant
 exports.getMerchant = asyncHandler(async (req, res, next) => {
+  if (req.role === "merchant") {
+    if (req.params.id !== req.user._id.toString()) {
+      return next(
+        new ErrorResponse(
+          `Not authorized to get merchant with id ${req.params.id}`,
+          401
+        )
+      );
+    }
+  }
   const merchant = await Merchant.findById(req.params.id).populate("cards");
 
   if (!merchant) {
@@ -42,6 +52,17 @@ exports.createMerchant = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/merchants/:id
 // @access  Private/Admin
 exports.updateMerchant = asyncHandler(async (req, res, next) => {
+  if (req.role === "merchant") {
+    if (req.params.id !== req.user._id.toString()) {
+      return next(
+        new ErrorResponse(
+          `Not authorized to update merchant with id ${req.params.id}`,
+          401
+        )
+      );
+    }
+  }
+
   const merchant = await Merchant.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
