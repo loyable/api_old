@@ -1,6 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
-const sendEmail = require("../utils/sendEmail");
 const SMSClient = require("../utils/sms");
 const User = require("../models/User");
 const Merchant = require("../models/Merchant");
