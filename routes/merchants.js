@@ -35,7 +35,7 @@ router
 router
   .route("/:id")
   .get(authorize("merchant", "admin"), getMerchant)
-  .put(updateMerchant)
-  .delete(deleteMerchant);
+  .put(authorize("merchant", "admin"), updateMerchant)
+  .delete(authorize("merchant", "admin"), deleteMerchant);
 
 module.exports = router;

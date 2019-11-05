@@ -69,6 +69,17 @@ app.use(cors());
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Index page
+app.get("/", (req, res) => {
+  res.json({
+    version: process.env.APP_VERSION,
+    store: {
+      ios: process.env.STORE_IOS,
+      android: process.env.STORE_ANDROID
+    }
+  });
+});
+
 // Mount routers
 app.use("/api/v1/users", users);
 app.use("/api/v1/merchants", merchants);

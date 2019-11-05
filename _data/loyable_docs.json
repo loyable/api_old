@@ -1,0 +1,1258 @@
+{
+	"info": {
+		"_postman_id": "599fd54c-f74a-4f93-b6a4-7ce18c504f7c",
+		"name": "Loyable API",
+		"description": "Backend API for the Loyable application stack to manage Users, Merchants, Cards and Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Fetch all Users from database. Includes pagination, filtering, etc"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824"
+							]
+						},
+						"description": "Get single User by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"+393357898922\"\n  }"
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Add new User to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"+393391848457\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824"
+							]
+						},
+						"description": "Update single User in database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824"
+							]
+						},
+						"description": "Delete User from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merchants from User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants"
+							]
+						},
+						"description": "Fetch all merchants from User"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merchant from User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc"
+							]
+						},
+						"description": "Get Merchant from User"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Merchant to User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cards\": [\n        {\n            \"marked\": 1,\n            \"history\": [\n                {\n                    \"time\": \"2019-11-02T19:32:16.338Z\",\n                    \"type\": \"add\",\n                    \"value\": 1\n                }\n            ],\n            \"card\": \"5c9e1ec25918590a0d984ebf\"\n        }\n    ],\n    \"merchant\": \"5c9e1d645918590a0d984ebc\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants"
+							]
+						},
+						"description": "Add Merchant to User"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Merchant in User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hidden\":true\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc"
+							]
+						},
+						"description": "Update Merchant in User"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Merchant from User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc"
+							]
+						},
+						"description": "Delete single merchant from User"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merchant Cards from User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc/cards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards"
+							]
+						},
+						"description": "Fetch all Merchant Card from User"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merchant Card from User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc/cards/5dc1cd62509743630a43d67b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards",
+								"5dc1cd62509743630a43d67b"
+							]
+						},
+						"description": "Get single Merchant Card from User"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Merchant Card in User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"card\": \"5c9e1ec25918590a0d984ebf\",\n    \"marked\": 4,\n    \"history\": [\n        {\n            \"type\": \"add\",\n            \"value\": 1\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc/cards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards"
+							]
+						},
+						"description": "Add single Merchant Card in User"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Merchant Card in User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"marked\":6\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc/cards/5dc1cd62509743630a43d67b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards",
+								"5dc1cd62509743630a43d67b"
+							]
+						},
+						"description": "Update single Merchant Card in User"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Merchant Card in User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/5cafb4262455cf1b831d8824/merchants/5c9e1d645918590a0d984ebc/cards/5dbf1e8797cd4515632f8b01",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"5cafb4262455cf1b831d8824",
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards",
+								"5dbf1e8797cd4515632f8b01"
+							]
+						},
+						"description": "Delete single Merchant Card in User"
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD functionality for Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5ff71ec5-c47e-49d8-adbe-846dc5562ea3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "64ae9597-aa48-4062-92f0-1d61d0db01c4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Merchants",
+			"item": [
+				{
+					"name": "Get All Merchants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants"
+							]
+						},
+						"description": "Get all Merchants in database. Includes pagination, filtering, etc"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc"
+							]
+						},
+						"description": "Get single Merchant by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5c9e1d645918590a0d984ebc\",\n    \"name\": \"MiNi Sushi\",\n    \"description\": \"Lorem, ipsum dolor sit amet consectetur adipisicing elit.\",\n    \"address\": \"Via Emilio Morosini, 5, 20135 Milano MI\",\n    \"logo\": {\n        \"src\": \"logo_5c9e1d645918590a0d984ebc.png\",\n        \"width\": 140,\n        \"height\": 45,\n        \"backgroundColor\": \"#333333\"\n    },\n    \"details\": {\n        \"phone\": \"+39025455802\",\n        \"website\": \"http://www.minisushi.it\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/merchants",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants"
+							]
+						},
+						"description": "Add new Merchant to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc"
+							]
+						},
+						"description": "Update single Merchant in database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984eba",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984eba"
+							]
+						},
+						"description": "Delete Merchant from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merchant Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"users"
+							]
+						},
+						"description": "Fetch all Users assigned to Merchant"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User From Merchant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc/users/5cafb4262455cf1b831d8824",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"users",
+								"5cafb4262455cf1b831d8824"
+							]
+						},
+						"description": "Get single User from Merchant"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Merchant Cards",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc/cards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards"
+							]
+						},
+						"description": "Fetch all Cards assigned to Merchant"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Merchant Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/merchants/5c9e1d645918590a0d984ebc/cards/5c9e1ec25918590a0d984ebf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"merchants",
+								"5c9e1d645918590a0d984ebc",
+								"cards",
+								"5c9e1ec25918590a0d984ebf"
+							]
+						},
+						"description": "Get single Card assigned to Merchant"
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD functionality for Merchants",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e9ac1a2e-e77d-479a-90f9-81d57622d476",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf4ea9b-580f-4bc9-9d4c-e3c378b144d1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Get All Cards",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cards"
+							]
+						},
+						"description": "Fetch all Cards from database. Includes pagination, filtering, etc"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cards/5c9e1ec25918590a0d984ebf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cards",
+								"5c9e1ec25918590a0d984ebf"
+							]
+						},
+						"description": "Get single Card by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Card",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5c9e1ec25918590a0d984ebf\",\n    \"merchant\": \"5c9e1d645918590a0d984ebc\",\n    \"name\": \"Tessera Pranzo\",\n    \"description\": \"Lorem ipsum dolor sit amet\",\n    \"header\": {\n        \"logo\": {\n            \"src\": \"logo_5c9e1d645918590a0d984ebc.png\",\n            \"width\": 35,\n            \"height\": 16,\n            \"position\": \"left\",\n            \"verticalPosition\": \"top\"\n        },\n        \"text1\": {\n            \"value\": \"Tessera Pranzo\"\n        },\n        \"text2\": {\n            \"value\": \"Ogni 10 Pranzi 1 Omaggio!\"\n        }\n    },\n    \"footer\": {\n        \"value\": \"N.B. Non valido nei giorni festivi\"\n    },\n    \"design\": \"horizontal\",\n    \"marks\": {\n        \"total\": 10,\n        \"rows\": 2,\n        \"rowSpacing\": 15,\n        \"mark\": {\n            \"image\": {\n                \"src\": \"marker_5c9e1ec25918590a0d984ebf.png\",\n                \"width\": 38,\n                \"height\": 11\n            },\n            \"style\": {\n                \"backgroundColor\": \"#000000\",\n                \"shape\": {\n                    \"type\": \"round\",\n                    \"value\": 12\n                }\n            }\n        }\n    },\n    \"style\": {\n        \"height\": 210,\n        \"backgroundColor\": \"#333\",\n        \"borderRadius\": 10\n    }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/cards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cards"
+							]
+						},
+						"description": "Add new Card to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Tessera Pranzo\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/cards/5c9e1ec25918590a0d984ebf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cards",
+								"5c9e1ec25918590a0d984ebf"
+							]
+						},
+						"description": "Update single Card in database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cards/5c9e1ec25918590a0d984ebc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cards",
+								"5c9e1ec25918590a0d984ebc"
+							]
+						},
+						"description": "Delete Card from database"
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD functionality for Cards",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e0932bb2-6d75-4ae6-8c9a-44934167e291",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c247cfc-0768-4487-b011-8d3bdac71444",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User By Phone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"phone\":\"+393391848457\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register New User / Send SMS to User\n\nSMS token expires in 5 minutes"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User By Phone & SMS Code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3edf896a-cad8-4c5d-af48-1889dbc1b57a",
+								"exec": [
+									"pm.environment.set(\"TOKEN\",pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"phone\":\"+393391848457\",\n\t\"smsCode\":\"938686\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login User by Phone & SMS Code\n\nSMS token expires in 5 minutes and can be used only one time"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3edf896a-cad8-4c5d-af48-1889dbc1b57a",
+								"exec": [
+									"pm.environment.set(\"TOKEN\",pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"mini@gmail.com\",\n\t\"password\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login Merchant by Email & Password"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password Merchant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3edf896a-cad8-4c5d-af48-1889dbc1b57a",
+								"exec": [
+									"pm.environment.set(\"TOKEN\",pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"mini@gmail.com\",\n\t\"currentPassword\":\"1234567\",\n\t\"newPassword\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/updatepassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"updatepassword"
+							]
+						},
+						"description": "Update password merchant"
+					},
+					"response": []
+				}
+			],
+			"description": "Routes for user authentication including register, login, change number, etc",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "764046bc-ec90-4f72-997f-e11937b2e276",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d809a3be-ab5c-48c2-943d-258cfce208ce",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ea97f4b9-8530-4e10-93b1-2fe547d06550",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e07c3e24-16ba-49e0-a958-66d2d814b800",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
