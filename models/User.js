@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
             {
               type: {
                 type: String,
-                enum: ["completed", "added", "add", "remove"]
+                enum: ["add", "remove"]
               },
               value: {
                 type: Number
@@ -56,6 +56,21 @@ const UserSchema = new mongoose.Schema({
             }
           ],
           createdAt: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ],
+      history: [
+        {
+          type: {
+            type: String,
+            enum: ["completed", "added"]
+          },
+          value: {
+            type: Number
+          },
+          time: {
             type: Date,
             default: Date.now
           }

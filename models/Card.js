@@ -64,6 +64,7 @@ const CardSchema = new mongoose.Schema({
   },
   design: {
     type: String,
+    required: [true, "Please add card.design"],
     enum: ["horizontal", "vertical"],
     default: "horizontal"
   },
@@ -105,6 +106,7 @@ const CardSchema = new mongoose.Schema({
             default: 0
           }
         },
+        justifyContent: String,
         borderWidth: Number,
         borderColor: String
       }
@@ -116,6 +118,7 @@ const CardSchema = new mongoose.Schema({
       min: 0,
       required: [true, "Please add style.height"]
     },
+    padding: Number,
     backgroundColor: String,
     borderRadius: Number,
     borderWidth: Number,
