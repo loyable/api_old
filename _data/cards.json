@@ -22,7 +22,8 @@
       }
     },
     "footer": {
-      "value": "N.B. Non valido nei giorni festivi"
+      "value": "N.B. Non valido nei giorni festivi",
+      "textAlign": "right"
     },
     "design": "horizontal",
     "marks": {
