@@ -155,9 +155,15 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 });
 
 // Get token from model, create cookie and send response
-const sendTokenResponse = (merchant, statusCode, res) => {
+const sendTokenResponse = (model, statusCode, res) => {
   // Create token
-  const token = merchant.getSignedJwtToken();
+  const token = model.getSignedJwtToken();
 
-  res.status(statusCode).json({ success: true, token });
+  res.status(statusCode).json({
+    success: true,
+    data: {
+      id: model._id,
+      token
+    }
+  });
 };

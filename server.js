@@ -70,7 +70,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Index page
-app.get("/", (req, res) => {
+app.get("/api/v1", (req, res) => {
   res.json({
     version: process.env.APP_VERSION,
     store: {
