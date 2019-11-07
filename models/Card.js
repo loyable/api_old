@@ -95,6 +95,7 @@ const CardSchema = new mongoose.Schema({
           type: String,
           default: "#000000"
         },
+<<<<<<< HEAD
         shape: {
           type: {
             type: String,
@@ -107,9 +108,30 @@ const CardSchema = new mongoose.Schema({
           }
         },
         justifyContent: String,
+=======
+>>>>>>> 0d9cda5600e4d0796d20a464515d511bc1b0f0ac
         borderWidth: Number,
-        borderColor: String
+        borderColor: String,
+        borderRadius: Number
       }
+    },
+    style: {
+      width: {
+        type: Number,
+        default: 50
+      },
+      height: {
+        type: Number,
+        default: 50
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      padding: Number,
+      borderWidth: Number,
+      borderColor: String,
+      borderRadius: Number
     }
   },
   style: {

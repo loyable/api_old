@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema({
         unique: true
       },
       hidden: {
-        type: Boolean
+        type: Boolean,
+        default: false
       },
       cards: [
         {
@@ -38,7 +39,8 @@ const UserSchema = new mongoose.Schema({
             default: 0
           },
           hidden: {
-            type: Boolean
+            type: Boolean,
+            default: false
           },
           history: [
             {

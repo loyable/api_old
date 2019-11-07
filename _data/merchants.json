@@ -7,7 +7,7 @@
     "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
     "address": "Via Emilio Morosini, 5, 20135 Milano MI",
     "logo": {
-      "src": "logo_5c9e1d645918590a0d984ebc.png",
+      "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
       "width": 140,
       "height": 45,
       "backgroundColor": "#333333"
@@ -15,6 +15,10 @@
     "details": {
       "phone": "+39025455802",
       "website": "http://www.minisushi.it"
+    },
+    "location": {
+      "type": "Point",
+      "coordinates": [45.4563687, 9.2090525]
     }
   }
 ]

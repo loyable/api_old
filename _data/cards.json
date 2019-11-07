@@ -6,17 +6,19 @@
     "description": "Lorem ipsum dolor sit amet",
     "header": {
       "logo": {
-        "src": "logo_5c9e1d645918590a0d984ebc.png",
-        "width": 35,
-        "height": 16,
+        "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+        "width": 112,
+        "height": 35,
         "position": "left",
         "verticalPosition": "top"
       },
       "text1": {
-        "value": "Tessera Pranzo"
+        "value": "Tessera Pranzo",
+        "textAlign": "right"
       },
       "text2": {
-        "value": "Ogni 10 Pranzi 1 Omaggio!"
+        "value": "Ogni 10 Pranzi 1 Omaggio!",
+        "textAlign": "right"
       }
     },
     "footer": {
@@ -29,17 +31,19 @@
       "rowSpacing": 15,
       "mark": {
         "image": {
-          "src": "marker_5c9e1ec25918590a0d984ebf.png",
+          "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
           "width": 38,
           "height": 11
         },
         "style": {
           "backgroundColor": "#000000",
-          "shape": {
-            "type": "round",
-            "value": 12
-          }
+          "borderRadius": 12
         }
+      },
+      "style": {
+        "padding": 2,
+        "backgroundColor": "#ffffff",
+        "borderRadius": 12
       }
     },
     "style": {
