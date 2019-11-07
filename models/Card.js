@@ -95,21 +95,6 @@ const CardSchema = new mongoose.Schema({
           type: String,
           default: "#000000"
         },
-<<<<<<< HEAD
-        shape: {
-          type: {
-            type: String,
-            enum: ["circle", "round"],
-            default: "round"
-          },
-          value: {
-            type: Number,
-            default: 0
-          }
-        },
-        justifyContent: String,
-=======
->>>>>>> 0d9cda5600e4d0796d20a464515d511bc1b0f0ac
         borderWidth: Number,
         borderColor: String,
         borderRadius: Number

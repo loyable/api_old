@@ -16,6 +16,12 @@
               }
             ]
           }
+        ],
+        "history": [
+          {
+            "type": "added",
+            "value": 1
+          }
         ]
       }
     ]
