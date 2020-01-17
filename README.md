@@ -6,6 +6,12 @@
 
 Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own
 
+Start MongoDB Local Database or use an External Database
+
+```
+sudo mongod --dbpath=/usr/local/mongodb/data/db --logpath=/var/log/mongodb.log --fork
+```
+
 ## Install Dependencies
 
 ```
